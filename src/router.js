@@ -4,6 +4,7 @@ import Home from "./views/Home.vue";
 import MenProducts from "./views/MenProducts.vue";
 import WomenProducts from "./views/WomenProducts.vue";
 import KidsProducts from "./views/KidsProducts.vue";
+import ProductPage from "./views/ProductPage.vue";
 
 Vue.use(Router);
 
@@ -19,26 +20,29 @@ export default new Router({
     {
       path: "/men",
       name: "menProducts",
-      component: MenProducts
+      component: MenProducts,
+    },
+    {
+      path: "/men/:id",
+      component: ProductPage
     },
     {
       path: "/women",
       name: "womenProducts",
-      component: WomenProducts
+      component: WomenProducts,
     },
     {
-      path: "/kids",
+      path: "/women/:id",
+      component: ProductPage
+    },
+    {
+      path: "/kids/",
       name: "kidsProducts",
       component: KidsProducts
     },
     {
-      path: "/about",
-      name: "about",
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () =>
-        import(/* webpackChunkName: "about" */ "./views/About.vue")
+      path: "/kids/:id",
+      component: ProductPage
     }
   ]
 });

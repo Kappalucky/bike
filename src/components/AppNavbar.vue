@@ -1,10 +1,5 @@
 <template>
 	<nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6">
-		<div class="flex items-center flex-shrink-0 text-white mr-6">
-			<a href="/">
-				<span class="font-semibold text-xl tracking-tight">Bike Shop</span>
-			</a>
-		</div>
 		<div class="block lg:hidden">
 			<button
 				class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white"
@@ -16,7 +11,19 @@
 				</svg>
 			</button>
 		</div>
-		<div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+		<div class="flex items-center flex-shrink-0 text-white mr-6">
+			<a href="/">
+				<span class="font-semibold text-xl tracking-tight">Bike Shop</span>
+			</a>
+		</div>
+		<div class="block order-last">
+			<button class="flex align-items px-3 py-2">
+				<font-awesome-icon :icon="['fas', 'shopping-bag']" class="text-white" />
+				<span class="mx-1 text-white">{{ cart.length }}</span>
+			</button>
+		</div>
+		<!--Mobile Menu-->
+		<div class="w-full block lg:hidden flex-grow lg:flex lg:items-center lg:w-auto" v-show="isActive">
 			<div class="text-sm lg:flex-grow">
 				<a
 					href="/men"
@@ -31,9 +38,22 @@
 					class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-teal-200 mr-4"
 				>Kids</a>
 			</div>
-			<div>
-				<font-awesome-icon :icon="['fas', 'shopping-bag']" class="text-white" />
-				<span class="mx-1 text-white">{{ cart.length }}</span>
+		</div>
+		<!--End Mobile Menu-->
+		<div class="w-full hidden lg:block flex-grow lg:flex lg:items-center lg:w-auto" >
+			<div class="text-sm lg:flex-grow">
+				<a
+					href="/men"
+					class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-teal-200 mr-4"
+				>Men</a>
+				<a
+					href="/women"
+					class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-teal-200 mr-4"
+				>Women</a>
+				<a
+					href="/kids"
+					class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-teal-200 mr-4"
+				>Kids</a>
 			</div>
 		</div>
 	</nav>
