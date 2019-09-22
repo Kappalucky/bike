@@ -1,6 +1,9 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
+import MenProducts from "./views/MenProducts.vue";
+import WomenProducts from "./views/WomenProducts.vue";
+import KidsProducts from "./views/KidsProducts.vue";
 
 Vue.use(Router);
 
@@ -12,6 +15,21 @@ export default new Router({
       path: "/",
       name: "home",
       component: Home
+    },
+    {
+      path: "/men",
+      name: "menProducts",
+      component: MenProducts
+    },
+    {
+      path: "/women",
+      name: "womenProducts",
+      component: WomenProducts
+    },
+    {
+      path: "/kids",
+      name: "kidsProducts",
+      component: KidsProducts
     },
     {
       path: "/about",

@@ -6,8 +6,25 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    product: products.products
+    products: products.products,
+    cart: []
   },
   mutations: {},
-  actions: {}
+  actions: {},
+  getters: {
+    getProductById: state => id => {
+      return state.products.find(product => product.id === id);
+    },
+    getProductByGroup: state => group => {
+      if (group === "Kids") {
+        return state.products.filter(product => product.name.includes(group));
+      } else {
+        return state.products.filter(
+          product =>
+            product.name.includes(group) ||
+            product.name.includes("Adult Unisex")
+        );
+      }
+    }
+  }
 });

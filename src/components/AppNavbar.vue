@@ -1,7 +1,9 @@
 <template>
 	<nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6">
 		<div class="flex items-center flex-shrink-0 text-white mr-6">
-			<span class="font-semibold text-xl tracking-tight">Bike Shop</span>
+			<a href="/">
+				<span class="font-semibold text-xl tracking-tight">Bike Shop</span>
+			</a>
 		</div>
 		<div class="block lg:hidden">
 			<button
@@ -16,23 +18,38 @@
 		</div>
 		<div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
 			<div class="text-sm lg:flex-grow">
-				<a href="#" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-teal-200 mr-4">Men</a>
-				<a href="#" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-teal-200 mr-4">Women</a>
-				<a href="#" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-teal-200 mr-4">Kids</a>
+				<a
+					href="/men"
+					class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-teal-200 mr-4"
+				>Men</a>
+				<a
+					href="/women"
+					class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-teal-200 mr-4"
+				>Women</a>
+				<a
+					href="/kids"
+					class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-teal-200 mr-4"
+				>Kids</a>
 			</div>
 			<div>
 				<font-awesome-icon :icon="['fas', 'shopping-bag']" class="text-white" />
+				<span class="mx-1 text-white">{{ cart.length }}</span>
 			</div>
 		</div>
 	</nav>
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
 	data() {
 		return {
 			isActive: false
 		};
+	},
+	computed: {
+		...mapState(["cart"])
 	}
 };
 </script>
