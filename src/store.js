@@ -7,7 +7,18 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     products: products.products,
-    cart: []
+    cart: [
+      {
+        product: {
+          id: 1,
+          image: "http://via.placeholder.com/250x250?text=Adult%20Male%20Bike",
+          name: "Adult Male Bike",
+          price: 20.5,
+          product_type: "bike"
+        },
+        quantity: 2
+      }
+    ]
   },
   mutations: {},
   actions: {},

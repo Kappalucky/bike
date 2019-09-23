@@ -5,6 +5,8 @@ import MenProducts from "./views/MenProducts.vue";
 import WomenProducts from "./views/WomenProducts.vue";
 import KidsProducts from "./views/KidsProducts.vue";
 import ProductPage from "./views/ProductPage.vue";
+import Cart from "./views/Cart.vue";
+import Checkout from "./views/Checkout.vue";
 
 Vue.use(Router);
 
@@ -14,13 +16,14 @@ export default new Router({
   routes: [
     {
       path: "/",
-      name: "home",
-      component: Home
+      redirect: "/women"
+      //name: "home",
+      //component: Home
     },
     {
       path: "/men",
       name: "menProducts",
-      component: MenProducts,
+      component: MenProducts
     },
     {
       path: "/men/:id",
@@ -29,7 +32,7 @@ export default new Router({
     {
       path: "/women",
       name: "womenProducts",
-      component: WomenProducts,
+      component: WomenProducts
     },
     {
       path: "/women/:id",
@@ -43,6 +46,16 @@ export default new Router({
     {
       path: "/kids/:id",
       component: ProductPage
+    },
+    {
+      path: "/cart",
+      name: "cart",
+      component: Cart
+    },
+    {
+      path: "/checkout",
+      name: "checkout",
+      component: Checkout
     }
   ]
 });

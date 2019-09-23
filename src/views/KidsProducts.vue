@@ -11,7 +11,7 @@
 					<router-link :to="`/kids/${product.id}`">
 						<div class="max-w-sm rounded overflow-hidden shadow-lg">
 							<img class="w-full" :src="product.image" />
-							<div class="px-6 py-4">
+							<div class="px-6 py-4 h-32">
 								<div class="font-bold text-lg mb-2">{{ product.name }}</div>
 								<small class="text-gray-700 text-base">${{ product.price.toFixed(2) }}</small>
 							</div>
