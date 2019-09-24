@@ -5,6 +5,7 @@ import MenProducts from "./views/MenProducts.vue";
 import WomenProducts from "./views/WomenProducts.vue";
 import KidsProducts from "./views/KidsProducts.vue";
 import ProductPage from "./views/ProductPage.vue";
+import ProductGrid from "./views/ProductGrid.vue";
 import Cart from "./views/Cart.vue";
 import Checkout from "./views/Checkout.vue";
 
@@ -16,36 +17,38 @@ export default new Router({
   routes: [
     {
       path: "/",
-      redirect: "/women"
-      //name: "home",
-      //component: Home
+      name: "home",
+      component: Home
     },
     {
       path: "/men",
       name: "menProducts",
-      component: MenProducts
+      component: ProductGrid
     },
     {
       path: "/men/:id",
-      component: ProductPage
+      component: ProductPage,
+      props: true
     },
     {
       path: "/women",
       name: "womenProducts",
-      component: WomenProducts
+      component: ProductGrid
     },
     {
       path: "/women/:id",
-      component: ProductPage
+      component: ProductPage,
+      props: true
     },
     {
       path: "/kids/",
       name: "kidsProducts",
-      component: KidsProducts
+      component: ProductGrid
     },
     {
       path: "/kids/:id",
-      component: ProductPage
+      component: ProductPage,
+      props: true
     },
     {
       path: "/cart",

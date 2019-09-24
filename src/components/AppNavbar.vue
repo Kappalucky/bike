@@ -15,8 +15,14 @@
 			<a href="/">
 				<span class="font-semibold text-xl tracking-tight">Bike Shop</span>
 			</a>
+			<div :class="[isActive ? 'block' : 'hidden']">
+				<button class="flex align-items px-3 py-2">
+					<font-awesome-icon :icon="['fas', 'shopping-bag']" class="text-white" />
+					<span class="mx-1 text-white">{{ cart.length }}</span>
+				</button>
+			</div>
 		</div>
-		<div class="block order-last">
+		<div class="order-last" :class="[isActive ? 'hidden' : 'block']">
 			<button class="flex align-items px-3 py-2">
 				<font-awesome-icon :icon="['fas', 'shopping-bag']" class="text-white" />
 				<span class="mx-1 text-white">{{ cart.length }}</span>
@@ -40,7 +46,7 @@
 			</div>
 		</div>
 		<!--End Mobile Menu-->
-		<div class="w-full hidden lg:block flex-grow lg:flex lg:items-center lg:w-auto" >
+		<div class="w-full hidden lg:block flex-grow lg:flex lg:items-center lg:w-auto">
 			<div class="text-sm lg:flex-grow">
 				<a
 					href="/men"
