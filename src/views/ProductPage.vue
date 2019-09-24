@@ -5,24 +5,24 @@
 				<nav class="pb-8">
 					<div class="tracking-wide text-left capitalize flex">
 						<template v-if="this.$route.fullPath.includes('kids')">
-							<a href="/kids">
+							<router-link to="/kids">
 								<span>Kids</span>
-							</a>
+							</router-link>
 						</template>
 						<template v-else-if="this.$route.fullPath.includes('women')">
-							<a href="/women">
+							<router-link to="/women">
 								<span>Women</span>
-							</a>
+							</router-link>
 						</template>
 						<template v-else>
-							<a href="/men">
+							<router-link to="/men">
 								<span>Men</span>
-							</a>
+							</router-link>
 						</template>
 						<span class="mx-1">></span>
-						<a :href="this.$route.fullPath">
+						<router-link :to="this.$route.fullPath">
 							<span>{{product.name}}</span>
-						</a>
+						</router-link>
 					</div>
 				</nav>
 				<section
@@ -74,7 +74,9 @@
 							</div>
 							<div class="block mt-3 w-auto flex justify-center">
 								<button
+									type="button"
 									class="bg-gray-400 hover:bg-gray-700 w-full text-white font-bold py-2 px-4 rounded uppercase"
+									v-on:click="toCart"
 								>Add To Cart</button>
 							</div>
 						</div>
@@ -86,7 +88,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
 	name: "ProductPage",
@@ -103,6 +105,18 @@ export default {
 	},
 	computed: {
 		...mapGetters(["getProductById"])
+	},
+	methods: {
+		...mapActions(["addToCart"]),
+		toCart() {
+			const item = {
+				id: this.product.id,
+				product: this.product,
+				quantity: this.quantity
+			};
+
+			this.addToCart(item);
+		}
 	}
 };
 </script>

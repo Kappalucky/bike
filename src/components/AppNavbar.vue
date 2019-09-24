@@ -2,6 +2,7 @@
 	<nav class="flex items-center justify-between flex-wrap bg-teal-500 p-6">
 		<div class="block lg:hidden">
 			<button
+				type="button"
 				class="flex items-center px-3 py-2 border rounded text-teal-200 border-teal-400 hover:text-white hover:border-white"
 				v-on:click="isActive = !isActive"
 			>
@@ -12,54 +13,58 @@
 			</button>
 		</div>
 		<div class="flex items-center flex-shrink-0 text-white mr-6">
-			<a href="/">
+			<router-link to="/">
 				<span class="font-semibold text-xl tracking-tight">Bike Shop</span>
-			</a>
+			</router-link>
 			<div :class="[isActive ? 'block' : 'hidden']">
-				<button class="flex align-items px-3 py-2">
-					<font-awesome-icon :icon="['fas', 'shopping-bag']" class="text-white" />
-					<span class="mx-1 text-white">{{ cart.length }}</span>
-				</button>
+				<router-link to="/cart">
+					<button type="button" class="flex align-items px-3 py-2">
+						<font-awesome-icon :icon="['fas', 'shopping-bag']" class="text-white" />
+						<span class="mx-1 text-white">{{ cart.length }}</span>
+					</button>
+				</router-link>
 			</div>
 		</div>
 		<div class="order-last" :class="[isActive ? 'hidden' : 'block']">
-			<button class="flex align-items px-3 py-2">
-				<font-awesome-icon :icon="['fas', 'shopping-bag']" class="text-white" />
-				<span class="mx-1 text-white">{{ cart.length }}</span>
-			</button>
+			<router-link to="/cart">
+				<button type="button" class="flex align-items px-3 py-2">
+					<font-awesome-icon :icon="['fas', 'shopping-bag']" class="text-white" />
+					<span class="mx-1 text-white">{{ cart.length }}</span>
+				</button>
+			</router-link>
 		</div>
 		<!--Mobile Menu-->
 		<div class="w-full block lg:hidden flex-grow lg:flex lg:items-center lg:w-auto" v-show="isActive">
 			<div class="text-sm lg:flex-grow">
-				<a
-					href="/men"
+				<router-link
+					to="/men"
 					class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-teal-200 mr-4"
-				>Men</a>
-				<a
-					href="/women"
+				>Men</router-link>
+				<router-link
+					to="/women"
 					class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-teal-200 mr-4"
-				>Women</a>
-				<a
-					href="/kids"
+				>Women</router-link>
+				<router-link
+					to="/kids"
 					class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-teal-200 mr-4"
-				>Kids</a>
+				>Kids</router-link>
 			</div>
 		</div>
 		<!--End Mobile Menu-->
 		<div class="w-full hidden lg:block flex-grow lg:flex lg:items-center lg:w-auto">
 			<div class="text-sm lg:flex-grow">
-				<a
-					href="/men"
+				<router-link
+					to="/men"
 					class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-teal-200 mr-4"
-				>Men</a>
-				<a
-					href="/women"
+				>Men</router-link>
+				<router-link
+					to="/women"
 					class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-teal-200 mr-4"
-				>Women</a>
-				<a
-					href="/kids"
+				>Women</router-link>
+				<router-link
+					to="/kids"
 					class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-teal-200 mr-4"
-				>Kids</a>
+				>Kids</router-link>
 			</div>
 		</div>
 	</nav>

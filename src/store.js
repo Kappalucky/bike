@@ -7,21 +7,56 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     products: products.products,
-    cart: [
-      {
-        product: {
-          id: 1,
-          image: "http://via.placeholder.com/250x250?text=Adult%20Male%20Bike",
-          name: "Adult Male Bike",
-          price: 20.5,
-          product_type: "bike"
-        },
-        quantity: 2
-      }
-    ]
+    cart: []
   },
-  mutations: {},
-  actions: {},
+  mutations: {
+    ADD_CART_ITEM(state, item) {
+      state.cart.push(item);
+    },
+    UPDATE_QUANTITY(state, payload) {
+      state.cart[payload.id].quantity = payload.amount;
+    },
+    DELETE_CART_ITEM(state, id) {
+      const newObject = state.cart.filter(item => item.product.id !== id);
+      state.cart = newObject;
+    }
+  },
+  actions: {
+    addToCart({ commit, state }, item) {
+      return new Promise(resolve => {
+        if (state.cart.length === 0) {
+          // No items exist
+          commit("ADD_CART_ITEM", item);
+        } else {
+          // Check if item is in array
+          const itemExist = state.cart.some(
+            cartItem => cartItem.id === item.id
+          );
+
+          if (itemExist == true) {
+            for (let i in state.cart) {
+              if (state.cart[i].id === item.id) {
+                // Item exist so add amount to quantity
+                let newAmount = state.cart[i].quantity + item.quantity;
+
+                commit({
+                  type: "UPDATE_QUANTITY",
+                  id: i,
+                  amount: newAmount
+                });
+
+                return;
+              }
+            }
+          } else {
+            // Items in array but not the particular one
+            commit("ADD_CART_ITEM", item);
+          }
+        }
+        resolve();
+      });
+    }
+  },
   getters: {
     getProductById: state => id => {
       return state.products.find(product => product.id === id);
