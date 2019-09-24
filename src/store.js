@@ -1,13 +1,13 @@
-import Vue from "vue";
-import Vuex from "vuex";
-import products from "@/assets/json/bikerentals.json";
+import Vue from 'vue';
+import Vuex from 'vuex';
+import products from '@/assets/json/bikerentals.json';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
     products: products.products,
-    cart: []
+    cart: [],
   },
   mutations: {
     ADD_CART_ITEM(state, item) {
@@ -19,30 +19,30 @@ export default new Vuex.Store({
     DELETE_CART_ITEM(state, id) {
       const newObject = state.cart.filter(item => item.product.id !== id);
       state.cart = newObject;
-    }
+    },
   },
   actions: {
     addToCart({ commit, state }, item) {
       return new Promise(resolve => {
         if (state.cart.length === 0) {
           // No items exist
-          commit("ADD_CART_ITEM", item);
+          commit('ADD_CART_ITEM', item);
         } else {
           // Check if item is in array
           const itemExist = state.cart.some(
-            cartItem => cartItem.id === item.id
+            cartItem => cartItem.id === item.id,
           );
 
-          if (itemExist == true) {
-            for (let i in state.cart) {
+          if (itemExist === true) {
+            for (const i in state.cart) {
               if (state.cart[i].id === item.id) {
                 // Item exist so add amount to quantity
-                let newAmount = state.cart[i].quantity + item.quantity;
+                const newAmount = state.cart[i].quantity + item.quantity;
 
                 commit({
-                  type: "UPDATE_QUANTITY",
+                  type: 'UPDATE_QUANTITY',
                   id: i,
-                  amount: newAmount
+                  amount: newAmount,
                 });
 
                 return;
@@ -50,27 +50,24 @@ export default new Vuex.Store({
             }
           } else {
             // Items in array but not the particular one
-            commit("ADD_CART_ITEM", item);
+            commit('ADD_CART_ITEM', item);
           }
         }
         resolve();
       });
-    }
+    },
   },
   getters: {
-    getProductById: state => id => {
-      return state.products.find(product => product.id === id);
-    },
+    getProductById: state => id =>
+      state.products.find(product => product.id === id),
     getProductByGroup: state => group => {
-      if (group === "Kids") {
+      if (group === 'Kids') {
         return state.products.filter(product => product.name.includes(group));
-      } else {
-        return state.products.filter(
-          product =>
-            product.name.includes(group) ||
-            product.name.includes("Adult Unisex")
-        );
       }
-    }
-  }
+      return state.products.filter(
+        product =>
+          product.name.includes(group) || product.name.includes('Adult Unisex'),
+      );
+    },
+  },
 });
