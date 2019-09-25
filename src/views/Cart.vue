@@ -10,7 +10,7 @@
         <template v-else>
           <form>
             <fieldset>
-              <table>
+              <table class="table-auto w-full">
                 <thead>
                   <th>Product</th>
                   <th>Qty</th>
