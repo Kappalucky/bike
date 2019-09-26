@@ -1,13 +1,13 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import { mapState } from 'vuex';
+import store from './store';
 import Home from './views/Home.vue';
-import MenProducts from './views/MenProducts.vue';
-import WomenProducts from './views/WomenProducts.vue';
-import KidsProducts from './views/KidsProducts.vue';
 import ProductPage from './views/ProductPage.vue';
 import ProductGrid from './views/ProductGrid.vue';
 import Cart from './views/Cart.vue';
 import Checkout from './views/Checkout.vue';
+import Error404 from './views/Error404.vue';
 
 Vue.use(Router);
 
@@ -59,6 +59,19 @@ export default new Router({
       path: '/checkout',
       name: 'checkout',
       component: Checkout,
+      beforeEnter: (to, from, next) => {
+        const cart = store.getters.getCartLength;
+        if (cart === 0) {
+          next('/');
+        } else {
+          next();
+        }
+      },
+    },
+    {
+      path: '*',
+      name: 'error404',
+      component: Error404,
     },
   ],
 });

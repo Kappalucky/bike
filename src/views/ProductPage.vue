@@ -79,7 +79,7 @@
                   type="button"
                   class="bg-gray-400 hover:bg-black w-full text-white font-bold py-2 px-4 rounded uppercase"
                   v-on:click="toCart"
-                >Add To Cart</button>
+                >{{buttonText}}</button>
               </div>
             </div>
           </section>
@@ -100,6 +100,7 @@ export default {
 			product: {},
 			//size: '',
 			quantity: '',
+			buttonText: 'Add To Cart',
 		};
 	},
 	created() {
@@ -118,6 +119,10 @@ export default {
 			};
 
 			this.addToCart(item);
+			this.buttonText = 'Added';
+			setTimeout(() => {
+				this.buttonText = 'Add To Cart';
+			}, 5000);
 		},
 	},
 };

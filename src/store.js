@@ -4,7 +4,7 @@ import products from '@/assets/json/bikerentals.json';
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
   state: {
     products: products.products,
     cart: [],
@@ -19,6 +19,9 @@ export default new Vuex.Store({
     DELETE_CART_ITEM(state, id) {
       const newObject = state.cart.filter(item => item.id !== id);
       state.cart = newObject;
+    },
+    EMPTY_CART(state) {
+      state.cart = [];
     },
   },
   actions: {
@@ -74,5 +77,8 @@ export default new Vuex.Store({
         (acc, item) => acc + item.product.price * item.quantity,
         0,
       ),
+    getCartLength: state => state.cart.length,
   },
 });
+
+export default store;
