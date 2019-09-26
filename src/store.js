@@ -17,7 +17,7 @@ export default new Vuex.Store({
       state.cart[payload.id].quantity = payload.amount;
     },
     DELETE_CART_ITEM(state, id) {
-      const newObject = state.cart.filter(item => item.product.id !== id);
+      const newObject = state.cart.filter(item => item.id !== id);
       state.cart = newObject;
     },
   },

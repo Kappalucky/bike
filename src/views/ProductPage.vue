@@ -36,7 +36,7 @@
           <section class="text-left sm:pl-0 md:pl-10 sm:mt-3 md:mt-0">
             <h1 class="text-4xl mb-3">{{product.name}}</h1>
             <div class="block">
-              <!--<div class="text-gray-500 text-lg mb-3">${{product.price.toFixed(2)}}</div>-->
+              <div class="text-gray-500 text-lg mb-3">${{product.price.toFixed(2)}}</div>
               <template v-if="product.product_type === 'bike'">
                 <div class="mb-3">
                   <p>A lovely bike that will last a long time. The ride is smooth, assembly takes a few minutes!</p>
