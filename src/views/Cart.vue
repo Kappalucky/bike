@@ -14,7 +14,7 @@
           <h1>Cart is Empty</h1>
         </template>
         <template v-else>
-          <form>
+          <form @submit.prevent="validate">
             <fieldset>
               <table class="table-auto w-full mb-4">
                 <thead>
@@ -65,19 +65,95 @@
                       </td>
                       <td class="item-price text-black">${{item.product.price.toFixed(2)}}</td>
                       <td
-                        class="item-total text-black text-right pr-3"
+                        class="item-total text-black font-bold text-right pr-0 md:pr-3"
                       >${{(item.product.price * item.quantity).toFixed(2)}}</td>
                     </tr>
+                  </template>
+                  <template>
+                    <tr>
+                      <td class="mx-auto pt-2 bg-black text-center" colspan="5">
+                        <button
+                          class="pb-2 text-white"
+                          type="button"
+                          v-on:click="addOn = !addOn"
+                        >Apply Addons?</button>
+                      </td>
+                    </tr>
+                  </template>
+                  <template v-if="addOn">
+                    <template v-for="item in products">
+                      <template v-if="item.product_type == 'addon'">
+                        <tr class="border-b border-solid" :key="item.id">
+                          <td class="item-image w-24 py-4">
+                            <img style="height:auto; width:110px;" :src="item.image" />
+                          </td>
+                          <td class="item-details px-3">
+                            <div class="detail">
+                              <div
+                                class="name font-bold leading-none text-left capitalize"
+                              >{{item.name}}</div>
+                              <div
+                                class="type text-sm leading-tight text-gray-600 text-left mb-2 capitalize"
+                              >{{item.product_type}}</div>
+                            </div>
+                          </td>
+                          <td class="item-quantity text-black">
+                            <div class="qty-wrapper">
+                              <button
+                                class="bg-gray-400 hover:bg-black text-white font-bold py-2 px-4 text-xs rounded uppercase"
+                                type="button"
+                                v-on:click="toCart(item)"
+                              >Add To Cart</button>
+                            </div>
+                          </td>
+                          <td
+                            colspan="2"
+                            class="item-price text-right pr-3 text-black"
+                          >${{item.price.toFixed(2)}}</td>
+                        </tr>
+                      </template>
+                    </template>
                   </template>
                 </tbody>
               </table>
               <div class="cart-footer">
-                <div class="subtotal">
-                  <span>Subtotal</span>
-                  <span>$cartTotalReduce</span>
+                <div class="summary float-right w-64 mb-4 pb-10">
+                  <table class="table-auto mt-3">
+                    <tbody>
+                      <tr class="font-bold text-sm">
+                        <td class="w-3/4 pl-0 text-left pr-12 py-2">Bag Subtotal</td>
+                        <td
+                          class="w-1/4 pl-0 text-right pr-8 py-2"
+                        >${{this.getCartTotal.toFixed(2)}}</td>
+                      </tr>
+                      <tr class="font-bold text-sm">
+                        <td class="w-3/4 pl-0 text-left pr-12 py-2">Shipping</td>
+                        <td class="w-1/4 pl-0 text-right pr-8 py-2">Free</td>
+                      </tr>
+                      <tr class="font-bold text-sm">
+                        <td class="w-3/4 pl-0 text-left pr-12 py-2">Estimated Tax</td>
+                        <td class="w-1/4 pl-0 text-right pr-8 py-2">-</td>
+                      </tr>
+                      <tr
+                        class="cart-total font-bold text-sm border-t border-dashed border-gray-800"
+                      >
+                        <td class="w-3/4 pl-0 text-left pr-12 py-2">Estimated Total</td>
+                        <td
+                          class="w-1/4 pl-0 text-right pr-8 py-2"
+                        >${{this.getCartTotal.toFixed(2)}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
                 <br />
-                <button>Checkout</button>
+              </div>
+            </fieldset>
+            <fieldset>
+              <div class="form-actions mb-4 w-56 float-right mr-4 text-right">
+                <button
+                  class="bg-gray-400 hover:bg-black w-full text-white font-bold py-2 px-4 rounded uppercase"
+                  type="submit"
+                >Checkout</button>
               </div>
             </fieldset>
           </form>
@@ -88,18 +164,32 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex';
+import { mapState, mapMutations, mapActions, mapGetters } from 'vuex';
 
 export default {
 	name: 'Cart',
 	data() {
-		return {};
+		return {
+			addOn: false,
+		};
 	},
 	computed: {
-		...mapState(['cart']),
+		...mapState(['cart', 'products']),
+		...mapGetters(['getCartTotal']),
 	},
 	methods: {
 		...mapMutations(['UPDATE_QUANTITY', 'DELETE_CART_ITEM']),
+		...mapActions(['addToCart']),
+		toCart(product) {
+			const item = {
+				id: product.id,
+				product: product,
+				quantity: 1,
+			};
+
+			this.addToCart(item);
+			this.addOn = false;
+		},
 		updateQty(id) {
 			let amount = parseInt(document.getElementById(id).value, 10);
 
@@ -112,6 +202,15 @@ export default {
 		deleteItem(id) {
 			if (confirm(`You're about to delete an item, are you sure?`)) {
 				this.DELETE_CART_ITEM(id);
+			}
+		},
+		validate() {
+			const category = this.cart.map(item => item.product.product_type);
+
+			if (category.includes('bike')) {
+				this.$router.push('/checkout');
+			} else {
+				alert('You must reserve a bike');
 			}
 		},
 	},

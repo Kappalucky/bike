@@ -1,7 +1,9 @@
 <template>
   <div class="home container mx-auto px-1">
     <section>
-      <h1 class="capitalize">{{$route.path.substr(1, $route.path.length - 1)}}</h1>
+      <h1
+        class="py-10 text-center text-3xl font-semibold font-mono uppercase text-black"
+      >{{$route.path.substr(1, $route.path.length - 1)}}</h1>
     </section>
     <!--Grid-->
     <div class="flex flex-wrap mt-4 mb-4">

@@ -69,5 +69,10 @@ export default new Vuex.Store({
           product.name.includes(group) || product.name.includes('Adult Unisex'),
       );
     },
+    getCartTotal: state =>
+      state.cart.reduce(
+        (acc, item) => acc + item.product.price * item.quantity,
+        0,
+      ),
   },
 });
