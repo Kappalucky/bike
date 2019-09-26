@@ -40,13 +40,13 @@
     >
       <div class="text-sm lg:flex-grow">
         <router-link
-          to="/men"
-          class="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-teal-200 mr-4"
-        >Men</router-link>
-        <router-link
           to="/women"
           class="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-teal-200 mr-4"
         >Women</router-link>
+        <router-link
+          to="/men"
+          class="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-teal-200 mr-4"
+        >Men</router-link>
         <router-link
           to="/kids"
           class="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-teal-200 mr-4"
@@ -57,13 +57,13 @@
     <div class="w-full hidden lg:block flex-grow lg:flex lg:items-center lg:w-auto">
       <div class="text-sm lg:flex-grow">
         <router-link
-          to="/men"
-          class="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-teal-200 mr-4"
-        >Men</router-link>
-        <router-link
           to="/women"
           class="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-teal-200 mr-4"
         >Women</router-link>
+        <router-link
+          to="/men"
+          class="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-teal-200 mr-4"
+        >Men</router-link>
         <router-link
           to="/kids"
           class="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-teal-200 mr-4"
